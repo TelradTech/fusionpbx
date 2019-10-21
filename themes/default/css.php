@@ -712,17 +712,56 @@ $default_login = ($_REQUEST['login'] == 'default') ? true : false;
 			}
 	<?php } ?>
 
-	/* small screen, hide button labels if icons present */
-	@media (max-width: 990px) {
-		button:not(.btn-link) > span.button-label.hide-sm {
+/* BREAKPOINTS ****************************************************************/
+
+	/* hide button labels on medium and smaller screens (only if icons present) */
+	@media (max-width: 991.98px) {
+		button:not(.btn-link) > span.button-label.hide-md-dn {
 			display: none;
 			}
 	}
 
-	/* large screen show button labels if icons present */
-	@media (min-width: 991px) {
-		button:not(.btn-link) > span.button-label.hide-sm {
-			display: inline;
+	/* screens = extra small */
+	@media (max-width: 575.98px) {
+		.hide-xs,
+		.hide-sm-dn,
+		.hide-md-dn,
+		.hide-lg-dn {
+			display: none;
+			}
+	}
+
+	/* screens = small */
+	@media (min-width: 576px) and (max-width: 767.98px) {
+		.hide-sm,
+		.hide-sm-dn,
+		.hide-md-dn,
+		.hide-lg-dn {
+			display: none;
+			}
+	}
+
+	/* screens = medium */
+	@media (min-width: 768px) and (max-width: 991.98px) {
+		.hide-md,
+		.hide-md-dn,
+		.hide-lg-dn {
+			display: none;
+			}
+	}
+
+	/* screens = large */
+	@media (min-width: 992px) and (max-width: 1199.98px) {
+		.hide-lg,
+		.hide-lg-dn {
+			display: none;
+			}
+	}
+
+	/* screens >= extra large */
+	@media (min-width: 1200px) {
+		.hide-xl {
+			display: none;
 			}
 	}
 
@@ -1239,8 +1278,8 @@ $default_login = ($_REQUEST['login'] == 'default') ? true : false;
 		display: none;
 	}
 
-	/* expand search input on focus */
-	input[type=text].search {
+	/* expand list search input on focus */
+	input[type=text].list-search {
 		width: 70px;
 		min-width: 70px;
 		margin-left: 15px;
@@ -1249,7 +1288,7 @@ $default_login = ($_REQUEST['login'] == 'default') ? true : false;
 		transition: all .5s ease;
 		}
 
-	input[type=text].search:focus {
+	input[type=text].list-search:focus {
 		width: 150px;
 		}
 
@@ -2097,7 +2136,7 @@ $default_login = ($_REQUEST['login'] == 'default') ? true : false;
 		white-space: nowrap;
 		}
 
-/*******************************************************************************/
+/* LIST ACTION BAR *************************************************************/
 
 	div.action_bar {
 		position: -webkit-sticky;
@@ -2127,9 +2166,9 @@ $default_login = ($_REQUEST['login'] == 'default') ? true : false;
 		box-shadow: <?php echo ($_SESSION['theme']['action_bar_shadow']['text'] != '') ? $_SESSION['theme']['action_bar_shadow']['text'] : 'none'; ?>;
 		padding: 10px;
 		margin: -10px -10px 10px -10px;
-		-webkit-transition: all .3s ease;
-		-moz-transition: all .3s ease;
-		transition: all .3s ease;
+		-webkit-transition: all .2s ease;
+		-moz-transition: all .2s ease;
+		transition: all .2s ease;
 		}
 
 	div.action_bar.scroll {
@@ -2140,4 +2179,98 @@ $default_login = ($_REQUEST['login'] == 'default') ? true : false;
 		border-radius: <?php echo ($_SESSION['theme']['action_bar_border_radius_scroll']['text'] != '') ? $_SESSION['theme']['action_bar_border_radius_scroll']['text'] : 'initial'; ?>;
 		background: <?php echo ($_SESSION['theme']['action_bar_background_scroll']['text'] != '') ? $_SESSION['theme']['action_bar_background_scroll']['text'] : 'rgba(255,255,255,0.9)'; ?>;
 		box-shadow: <?php echo ($_SESSION['theme']['action_bar_shadow_scroll']['text'] != '') ? $_SESSION['theme']['action_bar_shadow_scroll']['text'] : '0 3px 3px 0 rgba(0,0,0,0.2)'; ?>;
+		}
+
+/* LIST ************************************************************************/
+
+	.list {
+		width: 100%;
+		}
+
+	.list tr {
+		cursor: default;
+		}
+
+	.list tr:hover td:not(.no-link),
+	.list tr:hover td:not(.no-link) a {
+		color: <?php echo ($_SESSION['theme']['text_link_color_hover']['text'] != '') ? $_SESSION['theme']['text_link_color_hover']['text'] : '#5082ca'; ?>;
+		cursor: pointer;
+		}
+
+	.list-header > th {
+		padding: 4px 7px;
+		text-align: left;
+		color: <?php echo ($_SESSION['theme']['table_heading_text_color']['text'] != '') ? $_SESSION['theme']['table_heading_text_color']['text'] : '#3164ad'; ?>;
+		font-size: <?php echo ($_SESSION['theme']['table_heading_text_size']['text'] != '') ? $_SESSION['theme']['table_heading_text_size']['text'] : '12px'; ?>;
+		font-family: <?php echo ($_SESSION['theme']['table_heading_text_font']['text'] != '') ? $_SESSION['theme']['table_heading_text_font']['text'] : 'arial'; ?>;
+		background: <?php echo ($_SESSION['theme']['table_heading_background_color']['text'] != '') ? $_SESSION['theme']['table_heading_background_color']['text'] : 'none'; ?>;
+		border-bottom: 1px solid <?php echo ($_SESSION['theme']['table_heading_border_color']['text'] != '') ? $_SESSION['theme']['table_heading_border_color']['text'] : '#a4aebf'; ?>;
+		}
+
+	.list-row:nth-child(odd) > :not(.action-button) {
+		background: <?php echo ($_SESSION['theme']['table_row_background_color_light']['text'] != '') ? $_SESSION['theme']['table_row_background_color_light']['text'] : '#ffffff'; ?>;
+		}
+
+	.list-row:nth-child(even) > :not(.action-button) {
+		background: <?php echo ($_SESSION['theme']['table_row_background_color_dark']['text'] != '') ? $_SESSION['theme']['table_row_background_color_dark']['text'] : '#e5e9f0'; ?>;
+		}
+
+	.list-row > td:not(.action-button) {
+		border-bottom: 1px solid <?php echo ($_SESSION['theme']['table_row_border_color']['text'] != '') ? $_SESSION['theme']['table_row_border_color']['text'] : '#c5d1e5'; ?>;
+		color: <?php echo ($_SESSION['theme']['table_row_text_color']['text'] != '') ? $_SESSION['theme']['table_row_text_color']['text'] : '#000'; ?>;
+		font-family: <?php echo ($_SESSION['theme']['table_row_text_font']['text'] != '') ? $_SESSION['theme']['table_row_text_font']['text'] : 'arial'; ?>;
+		font-size: <?php echo ($_SESSION['theme']['table_row_text_size']['text'] != '') ? $_SESSION['theme']['table_row_text_size']['text'] : '12px'; ?>;
+		text-align: left;
+		vertical-align: top;
+		}
+
+	.list-row > :not(.checkbox) {
+		padding: <?php echo ($_SESSION['theme']['table_row_padding']['text'] != '') ? $_SESSION['theme']['table_row_padding']['text'] : '4px 7px 4px 7px'; ?>;
+		}
+
+	.list-row > td.description {
+		background: <?php echo ($_SESSION['theme']['table_row_background_color_medium']['text'] != '') ? $_SESSION['theme']['table_row_background_color_medium']['text'] : '#f0f2f6'; ?> !important;
+		}
+
+	.list-header > .checkbox,
+	.list-row > .checkbox {
+		width: 1px;
+		text-align: center;
+		cursor: default !important;
+		}
+
+	.list-row > .checkbox {
+		padding: 3px 7px 1px 7px;
+		}
+
+	.list-row > .button {
+		margin: 0;
+		padding-top: 0;
+		padding-bottom: 0;
+		white-space: nowrap;
+		}
+
+	.list-row > .overflow {
+		max-width: 50px;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		}
+
+	.list-header > .action-button,
+	.list-row > .action-button {
+		width: 1px;
+		white-space: nowrap;
+		background: none;
+		padding: 0;
+		}
+
+	.list-header > .center,
+	.list-row > .center {
+		text-align: center !important;
+		}
+
+	.list-header > .right,
+	.list-row > .right {
+		text-align: right !important;
 		}

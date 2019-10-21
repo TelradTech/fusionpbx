@@ -78,9 +78,38 @@ if (!class_exists('button')) {
 }
 
 /*
-//usage example (all possible options)
+//usage
 
-echo button::create(['type'=>'button','label'=>$label,'icon'=>'icon','name'=>'btn','id'=>'btn','value'=>'value','link'=>'url','target'=>'_blank','onclick'=>'action','class'=>'name','style'=>'css','title'=>'title']);
+	echo button::create(['type'=>'button','label'=>$text['button-label'],'icon'=>'icon','name'=>'btn','id'=>'btn','value'=>'value','link'=>'url','target'=>'_blank','onclick'=>'javascript','class'=>'name','style'=>'css','title'=>$text['button-label']]);
+
+	echo button::create([
+		'type'=>'button',
+		'label'=>$text['button-label'],
+		'icon'=>'icon',
+		'name'=>'btn',
+		'id'=>'btn',
+		'value'=>'value',
+		'link'=>'url',
+		'target'=>'_blank',
+		'onclick'=>'javascript',
+		'class'=>'name',
+		'style'=>'css',
+		'title'=>$text['button-label']
+		]);
+
+//options
+
+	note: all are parameters are optional, but at least set a value for label or icon
+
+	type		'button' (default) | 'submit' | 'link'
+	label		button text
+	icon		name without vendor prefix (e.g. 'user' instead of 'fa-user')
+	value		submitted value (if type is also set to 'submit')
+	target		'_blank' | '_self' (default) | etc
+	onclick		javascript
+	class		css class[es]
+	style		css style[s]
+	title		tooltip text (if not set, defaults to value of label)
 
 */
 
